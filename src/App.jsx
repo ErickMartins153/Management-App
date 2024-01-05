@@ -4,19 +4,29 @@ import Sidebar from "./components/Sidebar";
 import NewProject from "./components/NewProject";
 
 function App() {
-  const [projectInput, setProjectInput] = useState(false);
+  const [defaultInput, setDefaultInput] = useState(true);
+  const [projects, setProjects] = useState([]);
 
   function handleCreateProject(value) {
-    setProjectInput(value);
+    setDefaultInput(value);
+  }
+
+  function handleNewProject(project) {
+    setProjects((prevProjects) => [...prevProjects, project]);
   }
 
   return (
     <>
       <main className="flex my-2 h-screen">
-        <Sidebar onClick={handleCreateProject} />
+        <Sidebar onClick={handleCreateProject} projects={projects} />
         <div className="flex-1 flex-col gap-4 mx-auto justify-around items-center h-min pt-32">
-          {!projectInput && <DefaultInput onClick={handleCreateProject} />}
-          {projectInput && <NewProject onClick={handleCreateProject} />}
+          {defaultInput && <DefaultInput onClick={handleCreateProject} />}
+          {!defaultInput && (
+            <NewProject
+              reset={handleCreateProject}
+              onSubmit={handleNewProject}
+            />
+          )}
         </div>
       </main>
     </>

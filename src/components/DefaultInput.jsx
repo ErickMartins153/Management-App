@@ -8,7 +8,7 @@ export default function DefaultInput({ onClick }) {
       </p>
       <button
         className="bg-stone-700 hover:bg-stone-800 text-gray-400 p-2 rounded-md"
-        onClick={() => onClick(true)}
+        onClick={() => onClick(false)}
       >
         Create new project
       </button>

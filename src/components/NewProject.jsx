@@ -1,13 +1,29 @@
-export default function NewProject({ onClick }) {
+import { useRef } from "react";
+
+export default function NewProject({ reset, onSubmit }) {
+  const projectTitle = useRef();
+  const projectDescription = useRef();
+  const projectDueDate = useRef();
+
   return (
-    <form>
-      <div className="flex-1 flex-col gap-4 mx-auto justify-around items-center h-min pt-32"></div>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit({
+          title: projectTitle.current.value,
+          description: projectDescription.current.value,
+          dueDate: projectDueDate.current.value,
+        });
+        reset(true);
+      }}
+    >
+      <div className="flex-1 flex-col gap-4 mx-auto justify-around items-center h-min"></div>
       <div className="flex flex-col mr-64 ml-16">
         <div className="flex flex-row gap-2 justify-end">
           <button
             type="button"
             className="py-2 px-4 rounded-md hover:bg-stone-300"
-            onClick={() => onClick(false)}
+            onClick={() => reset(true)}
           >
             Cancel
           </button>
@@ -26,7 +42,12 @@ export default function NewProject({ onClick }) {
             >
               Title
             </label>
-            <input type="text" className="bg-stone-200 p-1" />
+            <input
+              required
+              ref={projectTitle}
+              type="text"
+              className="bg-stone-200 p-1"
+            />
           </div>
           <div className="flex flex-col">
             <label
@@ -36,6 +57,8 @@ export default function NewProject({ onClick }) {
               Description
             </label>
             <textarea
+              required
+              ref={projectDescription}
               className="bg-stone-200"
               name="description"
               id="description"
@@ -50,7 +73,7 @@ export default function NewProject({ onClick }) {
             >
               Due date
             </label>
-            <input type="date" />
+            <input required ref={projectDueDate} type="date" />
           </div>
         </div>
       </div>
