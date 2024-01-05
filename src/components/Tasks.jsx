@@ -25,7 +25,12 @@ export default function Tasks() {
           handleTasks();
         }}
       >
-        <input type="text" ref={task} required />
+        <input
+          type="text"
+          ref={task}
+          required
+          className="bg-stone-200 rounded-md border border-solid border-stone-400 hover:border-stone-500 focus:outline-none"
+        />
         <button type="submit" className="px-2 hover:bg-stone-200">
           Add Task
         </button>
