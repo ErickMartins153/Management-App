@@ -18,7 +18,7 @@ export default function ProjectPage({ currentProject, deleteProject }) {
           </button>
         </div>
         <hr className="my-4 border-t-2 border-gray-500" />
-        <Tasks />
+        <Tasks currentProject={currentProject} />
       </div>
     </div>
   );

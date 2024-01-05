@@ -1,18 +1,27 @@
 import { useRef, useState } from "react";
 import Task from "./Task";
 
-export default function Tasks() {
+export default function Tasks({ currentProject }) {
   const [tasks, setTasks] = useState([]);
   const task = useRef();
+  const projectTasks = currentProject.tasks;
 
   function handleTasks() {
     const currentTask = task.current.value;
     task.current.value = "";
-    setTasks((prevTasks) => [...prevTasks, currentTask]);
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks, currentTask];
+      currentProject.tasks = [...updatedTasks];
+      return updatedTasks;
+    });
   }
 
-  function handleClearTask(task) {
-    setTasks((prevTasks) => prevTasks.filter((taskName) => taskName !== task));
+  function handleClearTask(taskToRemove) {
+    const updatedTasks = projectTasks.filter(
+      (taskName) => taskName !== taskToRemove
+    );
+    currentProject.tasks = updatedTasks;
+    setTasks(updatedTasks);
   }
 
   return (
@@ -35,8 +44,8 @@ export default function Tasks() {
           Add Task
         </button>
       </form>
-      {tasks.length > 0 ? (
-        tasks.map((task) => {
+      {projectTasks.length > 0 ? (
+        projectTasks.map((task) => {
           return (
             <Task key={task} clearTask={handleClearTask}>
               {task}

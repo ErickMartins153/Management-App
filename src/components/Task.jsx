@@ -1,5 +1,4 @@
 export default function Task({ children, clearTask }) {
-  console.log(children);
   return (
     <div className=" flex flex-row justify-between bg-gray-200 m-1 p-2  ">
       <p>{children}</p>
