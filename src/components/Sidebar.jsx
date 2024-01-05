@@ -1,4 +1,4 @@
-export default function Sidebar({ projects = ["testing", "other"] }) {
+export default function Sidebar({ projects = ["testing", "other"], onClick }) {
   return (
     <div className="h-screen">
       <aside className=" bg-stone-950 pl-12 pt-12 pr-6 mt-14 h-full overflow-hidden w-1/3 md:w-72 rounded-r-lg">
@@ -6,7 +6,10 @@ export default function Sidebar({ projects = ["testing", "other"] }) {
           Your projects
         </h1>
         <div className="flex flex-col gap-4">
-          <button className="bg-stone-800 hover:bg-stone-900 text-neutral-500 p-2 rounded-md mt-12 mb-8 w-32">
+          <button
+            className="bg-stone-800 hover:bg-stone-900 text-neutral-500 p-2 rounded-md mt-12 mb-8 w-32"
+            onClick={onClick}
+          >
             + Add project
           </button>
 
