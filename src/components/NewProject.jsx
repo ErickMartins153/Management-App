@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function NewProject({ reset, onSubmit }) {
+export default function NewProject({ handlePage, onSubmit }) {
   const projectTitle = useRef();
   const projectDescription = useRef();
   const projectDueDate = useRef();
@@ -14,7 +14,7 @@ export default function NewProject({ reset, onSubmit }) {
           description: projectDescription.current.value,
           dueDate: projectDueDate.current.value,
         });
-        reset(true);
+        handlePage("default");
       }}
     >
       <div className="flex-1 flex-col gap-4 mx-auto justify-around items-center h-min"></div>
@@ -23,7 +23,7 @@ export default function NewProject({ reset, onSubmit }) {
           <button
             type="button"
             className="py-2 px-4 rounded-md hover:bg-stone-300"
-            onClick={() => reset(true)}
+            onClick={() => handlePage("default")}
           >
             Cancel
           </button>
