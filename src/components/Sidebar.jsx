@@ -1,7 +1,7 @@
-export default function Sidebar({ projects, handlePage }) {
+export default function Sidebar({ projects, handlePage, handleProject }) {
   return (
     <div className="h-screen">
-      <aside className=" bg-stone-950 pl-12 pt-12 pr-6 mt-14 h-full overflow-hidden w-1/3 md:w-72 rounded-r-lg">
+      <aside className=" bg-stone-950 pl-12 pt-12 pr-6 h-full overflow-hidden w-1/3 md:w-72 rounded-r-lg">
         <h1 className="text-xl uppercase font-bold text-stone-50">
           Your projects
         </h1>
@@ -15,6 +15,7 @@ export default function Sidebar({ projects, handlePage }) {
 
           {projects.map((project) => (
             <button
+              onClick={() => handleProject(project)}
               key={project.title}
               className=" hover:bg-stone-800 text-neutral-500 px-2 py-1 items-center text-start"
             >

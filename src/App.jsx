@@ -1,11 +1,13 @@
 import { useState } from "react";
-import DefaultInput from "./components/DefaultInput";
+import DefaultPage from "./components/DefaultPage";
 import Sidebar from "./components/Sidebar";
-import NewProject from "./components/NewProject";
+import NewProjectPage from "./components/NewProjectPage";
+import ProjectPage from "./components/ProjectPage";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("default");
   const [projects, setProjects] = useState([]);
+  const [currentProject, setCurrentProject] = useState({});
 
   function handlePage(value) {
     setCurrentPage(value);
@@ -15,16 +17,40 @@ function App() {
     setProjects((prevProjects) => [...prevProjects, project]);
   }
 
+  function handleProjectPage(project) {
+    setCurrentPage("project");
+    setCurrentProject(project);
+  }
+
+  function handleDeleteProject(projectTitle) {
+    setProjects((prevProjects) => [
+      ...prevProjects.filter((projectObj) => projectObj.title !== projectTitle),
+    ]);
+
+    handlePage("default");
+  }
+
   return (
     <>
-      <main className="flex my-2 h-screen">
-        <Sidebar handlePage={handlePage} projects={projects} />
+      <main className="flex h-screen">
+        <Sidebar
+          handlePage={handlePage}
+          projects={projects}
+          handleProject={handleProjectPage}
+        />
         <div className="flex-1 flex-col gap-4 mx-auto justify-around items-center h-min pt-32">
-          {currentPage === "default" && (
-            <DefaultInput handlePage={handlePage} />
-          )}
+          {currentPage === "default" && <DefaultPage handlePage={handlePage} />}
           {currentPage === "newProject" && (
-            <NewProject handlePage={handlePage} onSubmit={handleNewProject} />
+            <NewProjectPage
+              handlePage={handlePage}
+              onSubmit={handleNewProject}
+            />
+          )}
+          {currentPage === "project" && (
+            <ProjectPage
+              currentProject={currentProject}
+              deleteProject={handleDeleteProject}
+            />
           )}
         </div>
       </main>
