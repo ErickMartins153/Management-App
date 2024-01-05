@@ -1,4 +1,4 @@
-export default function DefaultInput({ handlePage }) {
+export default function DefaultPage({ handlePage }) {
   return (
     <div className="flex flex-col gap-4 mx-auto justify-around items-center h-min pt-32">
       <img src="src\assets\no-projects.png" alt="" className="w-24 h-24" />

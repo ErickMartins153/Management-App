@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function NewProject({ handlePage, onSubmit }) {
+export default function NewProjectPage({ handlePage, onSubmit }) {
   const projectTitle = useRef();
   const projectDescription = useRef();
   const projectDueDate = useRef();
@@ -13,6 +13,7 @@ export default function NewProject({ handlePage, onSubmit }) {
           title: projectTitle.current.value,
           description: projectDescription.current.value,
           dueDate: projectDueDate.current.value,
+          tasks: [],
         });
         handlePage("default");
       }}
