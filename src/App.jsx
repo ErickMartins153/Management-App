@@ -1,7 +1,15 @@
+import { useState } from "react";
+import DefaultInput from "./components/DefaultInput";
+import Sidebar from "./components/Sidebar";
+
 function App() {
+  const [projectInput, setProjectInput] = useState(false);
+
   return (
     <>
-      <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1>
+      <main className="flex my-2 h-screen">
+        <Sidebar />
+      </main>
     </>
   );
 }
